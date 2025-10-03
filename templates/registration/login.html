@@ -1,0 +1,31 @@
+{% extends "core/home.html" %}
+
+{% block title %}Login | Shortly{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-[70vh]">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-xl font-semibold text-center mb-4">Login</h1>
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      {% if form.errors %}
+        <div class="p-2 bg-red-100 text-red-700 rounded">
+          Invalid username or password. Please try again.
+        </div>
+      {% endif %}
+
+      {{ form.as_p }}
+
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md">
+        Login
+      </button>
+    </form>
+
+    <p class="text-sm text-center mt-4">
+      Don’t have an account? 
+      <a href="{% url 'signup' %}" class="text-indigo-600 hover:underline">Sign up</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

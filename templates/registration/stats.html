@@ -1,0 +1,5 @@
+<h2>Stats for {{ link.short_code }}</h2>
+<p>Original URL: <a href="{{ link.original_url }}">{{ link.original_url }}</a></p>
+<p>Short URL: <a href="/{{ link.short_code }}">{{ request.build_absolute_uri:'/‘ }}{{ link.short_code }}</a></p>
+<p>Total Clicks: {{ link.clicks }}</p>
+<p>Created At: {{ link.created_at }}</p>

@@ -1,0 +1,25 @@
+<!-- URL Shortener Form -->
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg mb-10">
+  <h2 class="text-xl font-semibold mb-4">Shorten a new URL</h2>
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <label for="url" class="block mb-1 font-medium">Paste your URL</label>
+      <input type="url" name="url" id="url" required
+             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+    <div>
+      <label for="days" class="block mb-1 font-medium">Expire in (days, optional)</label>
+      <input type="number" name="days" id="days" min="1"
+             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Shorten</button>
+  </form>
+
+  {% if short %}
+    <div class="mt-4 p-2 bg-green-100 text-green-800 rounded">
+      Your shortened URL: 
+      <a href="{{ short }}" class="underline text-indigo-600">{{ short }}</a>
+    </div>
+  {% endif %}
+</div>

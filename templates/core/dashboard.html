@@ -1,0 +1,49 @@
+{% extends "core/home.html" %}
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+  <h1 class="text-2xl font-semibold mb-6">{{ request.user.username }}’s Dashboard</h1>
+
+  {% include "core/shortener_form.html" %}
+
+  <!-- Quick Stats -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+    <div class="p-4 bg-white shadow rounded-lg text-center">
+      <p class="text-sm text-slate-500">Total Links</p>
+      <p class="text-2xl font-bold text-indigo-600">{{ total_links }}</p>
+    </div>
+    <div class="p-4 bg-white shadow rounded-lg text-center">
+      <p class="text-sm text-slate-500">Total Clicks</p>
+      <p class="text-2xl font-bold text-indigo-600">{{ total_clicks }}</p>
+    </div>
+    <div class="p-4 bg-white shadow rounded-lg text-center">
+      <p class="text-sm text-slate-500">Recent Links</p>
+      <p class="text-2xl font-bold text-indigo-600">{{ links|length }}</p>
+    </div>
+  </div>
+
+  <!-- Links List -->
+  <div class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-lg font-semibold mb-4">Your Links</h2>
+
+    {% if links %}
+      <ul class="divide-y divide-gray-200">
+        {% for link in links %}
+          <li class="py-3 flex justify-between items-center">
+            <div class="truncate">
+              <a href="/{{ link.short_code }}/" class="text-indigo-600 font-medium hover:underline">
+                {{ request.get_host }}/{{ link.short_code }}
+              </a>
+              <p class="text-xs text-slate-500 truncate">{{ link.original_url }}</p>
+            </div>
+            <span class="text-sm text-slate-500">{{ link.clicks }} clicks</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-slate-500 text-sm">No links yet. Start shortening some!</p>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}
